@@ -1,0 +1,28 @@
+#Configurando uma rede para conectar os conteiners
+networks:
+   apiunion-network: 
+      driver: bridge 
+
+#Configurando os serviços / conteiners
+services:
+ api-union:
+  build:
+   context: . 
+   dockerfile: Dockerfile
+  ports:
+   - "8080:8080"
+  networks:
+   - apiunion-network
+  depends_on:
+   - postgres
+   
+ postgres: 
+  image: postgres:latest
+  environment: 
+   POSTGRES_USER: postgres
+   POSTGRES_PASSWORD: coti
+   POSTGRES_DB: bd_union
+  ports:
+   - "5432:5432"
+  networks:
+   - apiunion-network
