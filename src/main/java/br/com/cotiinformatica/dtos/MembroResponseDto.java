@@ -11,6 +11,7 @@ public class MembroResponseDto {
 	private UUID idMembro;
 	private String nome;
 	private String email;
+	private String senha;
 	private String telefone;
 	private String empresa;
 	private String curriculo;
