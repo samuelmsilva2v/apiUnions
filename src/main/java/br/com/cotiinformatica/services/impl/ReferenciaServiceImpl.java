@@ -2,6 +2,7 @@ package br.com.cotiinformatica.services.impl;
 
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,6 +38,7 @@ public class ReferenciaServiceImpl implements ReferenciaService {
 		var referencia = new Referencia();
 		referencia.setIdReferencia(UUID.randomUUID());
 		referencia.setObservacoes(request.getObservacoes());
+		referencia.setStatus(request.getStatus());
 		referencia.setTipoReferencia(request.getTipoReferencia());
 		referencia.setAvaliacao(request.getAvaliacao());
 		referencia.setAvaliador(avaliador);
@@ -47,6 +49,7 @@ public class ReferenciaServiceImpl implements ReferenciaService {
 		var response = new ReferenciaResponseDto();
 		response.setIdReferencia(referencia.getIdReferencia());
 		response.setObservacoes(referencia.getObservacoes());
+		response.setStatus(referencia.getStatus());
 		response.setTipoReferencia(referencia.getTipoReferencia());
 		response.setAvaliacao(referencia.getAvaliacao());
 		response.setAvaliador(modelMapper.map(referencia.getAvaliador(), MembroResponseDto.class));
@@ -69,14 +72,14 @@ public class ReferenciaServiceImpl implements ReferenciaService {
 
 	@Override
 	public ReferenciaResponseDto consultarReferenciaPorId(UUID idReferencia) {
-		// TODO Auto-generated method stub
-		return null;
+		return modelMapper.map(referenciaRepository.findById(idReferencia).get(), ReferenciaResponseDto.class);
 	}
 
 	@Override
 	public List<ReferenciaResponseDto> consultarReferencias() {
-		// TODO Auto-generated method stub
-		return null;
+		return referenciaRepository.findAll().stream()
+	            .map(referencia -> modelMapper.map(referencia, ReferenciaResponseDto.class))
+	            .collect(Collectors.toList());
 	}
 
 }

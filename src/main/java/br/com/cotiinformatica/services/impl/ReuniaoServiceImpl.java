@@ -37,6 +37,7 @@ public class ReuniaoServiceImpl implements ReuniaoService {
 		var reuniao = new Reuniao();
 		reuniao.setIdReuniao(UUID.randomUUID());
 		reuniao.setDataEHora(request.getDataEHora());
+		reuniao.setLocal(request.getLocal());
 		reuniao.setMotivo(request.getMotivo());
 		reuniao.setSolicitante(solicitante);
 		reuniao.setConvidado(convidado);

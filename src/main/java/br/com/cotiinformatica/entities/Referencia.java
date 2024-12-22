@@ -3,6 +3,7 @@ package br.com.cotiinformatica.entities;
 import java.util.UUID;
 
 import br.com.cotiinformatica.enums.Avaliacao;
+import br.com.cotiinformatica.enums.Status;
 import br.com.cotiinformatica.enums.TipoReferencia;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -17,6 +18,7 @@ public class Referencia {
 	@Id
 	private UUID idReferencia;
 	private String observacoes;
+	private Status status;
 	private TipoReferencia tipoReferencia;
 	private Avaliacao avaliacao;
 
